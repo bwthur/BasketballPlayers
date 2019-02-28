@@ -29,8 +29,7 @@ public class PlayerFormAddNewActivity extends AppCompatActivity {
         int heightFt = Integer.parseInt(heightFeetET.getText().toString());
         int heightIn = Integer.parseInt(heightInchesET.getText().toString());
         PlayerForm pf = new PlayerForm(name, number, age, heightFt, heightIn);
-
-        pf.display();
-
+        Core.addPlayerForm(pf);
+        this.finish();
     }
 }

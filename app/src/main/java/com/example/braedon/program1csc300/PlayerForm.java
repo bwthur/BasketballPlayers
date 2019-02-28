@@ -1,6 +1,13 @@
 package com.example.braedon.program1csc300;
 
-public class PlayerForm
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class PlayerForm implements Serializable
 {
     private String playerName;
     private int jerseyNumber;
@@ -18,6 +25,35 @@ public class PlayerForm
         this.heightFeet = heightFeet;
         this.heightInches = heightInches;
     }
+
+    public PlayerForm()
+    {
+        this.playerName = "PLAYERNAME";
+        this.jerseyNumber = 0;
+        this.age = 0;
+        this.heightFeet = 0;
+        this.heightInches = 0;
+    }
+
+    @Exclude
+    public String getNameString()
+    {
+        return this.playerName;
+    }
+
+    @Exclude
+    public String getNumberString()
+    {
+        return "Jersey Number: (" + this.jerseyNumber + ")";
+    }
+
+    @Exclude
+    public String toString()
+    {
+        return this.playerName + " " + this.jerseyNumber + " " + this.age + " " + this.heightFeet + "\'" + this.heightInches + "\"";
+    }
+
+
 
     public void display()
     {
