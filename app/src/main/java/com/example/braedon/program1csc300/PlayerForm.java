@@ -42,9 +42,9 @@ public class PlayerForm implements Serializable
     }
 
     @Exclude
-    public String getNumberString()
+    public String getNumbersString()
     {
-        return "Jersey Number: (" + this.jerseyNumber + ")";
+        return "Jersey Number: " + this.jerseyNumber + " - " + this.heightFeet + "\'" + this.heightInches + "\" (" + this.age + ")";
     }
 
     @Exclude
@@ -60,28 +60,28 @@ public class PlayerForm implements Serializable
         System.out.println(this.playerName + " " + this.jerseyNumber + " " + this.age + " " + this.heightFeet + "\'" + this.heightInches + "\"");
     }
 
-//    public String getPlayerName()
-//    {
-//        return playerName;
-//    }
-//
-//    public int getJerseyNumber()
-//    {
-//        return jerseyNumber;
-//    }
-//
-//    public int getAge()
-//    {
-//        return age;
-//    }
-//
-//    public int getHeightFeet()
-//    {
-//        return heightFeet;
-//    }
-//
-//    public int getHeightInches()
-//    {
-//        return heightInches;
-//    }
+    public String getPlayerName()
+    {
+        return playerName;
+    }
+
+    public int getJerseyNumber()
+    {
+        return jerseyNumber;
+    }
+
+    public int getAge()
+    {
+        return age;
+    }
+
+    public int getHeightFeet()
+    {
+        return heightFeet;
+    }
+
+    public int getHeightInches()
+    {
+        return heightInches;
+    }
 }

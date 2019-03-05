@@ -13,48 +13,49 @@ public class Core
     private static int numberOfPlayers = 0;
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     public static DatabaseReference myRef = database.getReference("players");
+    public static PlayerFormArrayAdapter aa;
 
 
     public static void listenForDatabaseChanges()
     {
-        //async listener
-        ValueEventListener prListener = new ValueEventListener()
+        ValueEventListener pfListener = new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                // Get Post object and use the values to update the UI
-                System.out.println(dataSnapshot);
+                System.out.println("****" + dataSnapshot.getValue());
+                Core.numberOfPlayers = 0;
                 for(DataSnapshot ds: dataSnapshot.getChildren())
                 {
-                    PlayerForm pr = ds.getValue(PlayerForm.class);
-                    System.out.println("***** Data Changed");
-                    pr.display();
+                    PlayerForm pf = ds.getValue(PlayerForm.class);
                 }
-
+                Core.aa.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError)
             {
-                // Getting Post failed, log a message
                 System.out.println("loadPost:onCancelled " + databaseError.toException());
             }
         };
-        Core.myRef.addValueEventListener(prListener);
+        Core.myRef.addValueEventListener(pfListener);
     }
 
-    public static void writePlayerFormToFirebase(PlayerForm pr)
+    public static void writePlayerFormToFirebase(PlayerForm pf)
     {
-        //static context
-        Core.myRef.push().setValue(pr);
+        Core.myRef.push().setValue(pf);
     }
 
-    public static void addPlayerForm(PlayerForm pr)
+    public static void addPlayerFormLocal(PlayerForm pf)
     {
-        Core.thePlayers[Core.numberOfPlayers] = pr;
-        Core.thePlayerStrings[Core.numberOfPlayers] = pr.toString();
+        Core.thePlayers[Core.numberOfPlayers] = pf;
+        Core.thePlayerStrings[Core.numberOfPlayers] = pf.toString();
         Core.numberOfPlayers++;
-        Core.writePlayerFormToFirebase(pr);
+        Core.writePlayerFormToFirebase(pf);
+    }
+
+    public static void addPlayerFormDB(PlayerForm pf)
+    {
+        Core.writePlayerFormToFirebase(pf);
     }
 }

@@ -7,43 +7,69 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
 
 public class MainActivity extends AppCompatActivity
 {
+    private ListView lv;
 
-    private ListView listView;
-    private PlayerFormArrayAdapter aa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        //initializes the array of Strings so there are place holder strings in there
-        for(int i = 0; i < Core.thePlayers.length; i++)
+        super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(MainActivity.this);
+        for(int i =0; i < Core.thePlayers.length; i++)
         {
             Core.thePlayers[i] = new PlayerForm();
         }
 
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
-        this.aa = new PlayerFormArrayAdapter(this, R.layout.list_view_row_advanced, Core.thePlayers);
-        this.listView = (ListView)this.findViewById(R.id.listView);
-        this.listView.setAdapter(aa);
+        Core.aa = new PlayerFormArrayAdapter(this, R.layout.list_view_row_advanced, Core.thePlayers);
+        this.lv = (ListView)this.findViewById(R.id.listView);
+        this.lv.setAdapter(Core.aa);
 
-        //Start Listening for changes to the database
-        Core.listenForDatabaseChanges(); //non-blocking!!!!
-
+        Core.listenForDatabaseChanges();
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Core.aa.notifyDataSetChanged();
+        System.out.println("****** ON RESUME!!!!!!");
 
     }
 
     @Override
-    protected void onRestart()
-    {
+    protected void onStart() {
+        super.onStart();
+        System.out.println("****** ON START!!!!!!");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        System.out.println("****** ON PAUSE!!!!!!");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("****** ON STOP!!!!!!");
+
+    }
+
+    @Override
+    protected void onRestart() {
         super.onRestart();
         System.out.println("****** ON RESTART!!!!!!");
-        this.aa.notifyDataSetChanged();
+        Core.aa.notifyDataSetChanged();
+
     }
 
     public void onAddPlayerFormPressed(View v)
