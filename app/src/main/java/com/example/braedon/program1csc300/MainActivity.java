@@ -19,6 +19,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        LinkedList ll = new LinkedList();
+        ll.addEnd(3);
+        ll.addEnd(2);
+        ll.addEnd(1);
+        ll.display();
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(MainActivity.this);
         for(int i =0; i < Core.thePlayers.length; i++)
