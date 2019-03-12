@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
         ll.addEnd(3);
         ll.addEnd(2);
         ll.addEnd(1);
+        ll.removeAtIndex(0);
         ll.display();
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(MainActivity.this);
