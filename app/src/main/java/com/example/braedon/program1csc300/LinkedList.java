@@ -23,7 +23,7 @@ public class LinkedList
     public int getAtIndex(int index)
     {
         Node currNode = this.head;
-        for(int i = 0; i < index; i++)
+        for(int i = 1; i < index; i++)
         {
             currNode = currNode.getNextNode();
         }
