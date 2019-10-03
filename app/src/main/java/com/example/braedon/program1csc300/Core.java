@@ -10,7 +10,7 @@ public class Core
 {
     public static PlayerForm[] thePlayers = new PlayerForm[1000];
     public static String[] thePlayerStrings = new String[1000];
-    private static int numberOfPlayers = 0;
+    private static int numberOfPlayers = 10;
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     public static DatabaseReference myRef = database.getReference("players");
     public static PlayerFormArrayAdapter aa;
